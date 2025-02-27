@@ -87,6 +87,22 @@ function Quiz() {
             backgroundImage: `url('${process.env.PUBLIC_URL}/data/quizImages/decors/mobile_80km.jpg')`,
             backgroundSize: 'cover',
         },
+        decor_90km: {
+            backgroundImage: `url('${process.env.PUBLIC_URL}/data/quizImages/decors/90km.jpg')`,
+            backgroundSize: 'cover',
+        },
+        decorMobile_90km: {
+            backgroundImage: `url('${process.env.PUBLIC_URL}/data/quizImages/decors/mobile_90km.jpg')`,
+            backgroundSize: 'cover',
+        },
+        decor_100km: {
+            backgroundImage: `url('${process.env.PUBLIC_URL}/data/quizImages/decors/100km.jpg')`,
+            backgroundSize: 'cover',
+        },
+        decorMobile_100km: {
+            backgroundImage: `url('${process.env.PUBLIC_URL}/data/quizImages/decors/mobile_100km.jpg')`,
+            backgroundSize: 'cover',
+        },
     };
 
     
