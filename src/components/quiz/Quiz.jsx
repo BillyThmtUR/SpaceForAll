@@ -240,8 +240,8 @@ function Quiz() {
                                     <div 
                                         key={index}
                                         className={`h-[7vh] bg-transparent border-l-2 border-dashed self-center
-                                                    ${index > maxUnlockedStep ? 'border-[#00d0e3] opacity-30' :
-                                                    index === maxUnlockedStep ? 'border-[#00d0e3] opacity-30' :
+                                                    ${index > maxUnlockedStep ? 'border-[#00d0e3] opacity-70' :
+                                                    index === maxUnlockedStep ? 'border-[#00d0e3] opacity-70' :
                                                     index === maxUnlockedStep && score <= scoreSuccessLimit ? 'border-[#00d0e3]' :
                                                     'border-[#edc314]'}`} 
                                     />
@@ -250,14 +250,14 @@ function Quiz() {
                                         key={index} 
                                         onClick={() => handleStepClick(index)}
                                         disabled={index > maxUnlockedStep}
-                                        className={`relative bg-[rgba(0,208,227,1)] border-[2px] border-[#00d0e3] rounded-full stepShadow backdrop-blur-md backdrop-shadow-md p-10 w-[vw] text-xl 
-                                                    ${index > maxUnlockedStep ? 'opacity-30 cursor-not-allowed' : 
+                                        className={`relative bg-[rgba(0,208,227,1)] border-[3px] border-[#00d0e3] rounded-lg stepShadow backdrop-blur-md shadow-xl p-10 w-[vw] text-xl 
+                                                    ${index > maxUnlockedStep ? 'opacity-60 cursor-not-allowed bg-[rgba(0,208,227,0.05)] backdrop-blur-xl' : 
                                                     index === maxUnlockedStep ? 'gradiantSolar hover:scale-105' :
-                                                    index === maxUnlockedStep && score <= scoreSuccessLimit ? 'bg-[rgba(193,17,17,0.9)] ' :
+                                                    index === maxUnlockedStep && score <= scoreSuccessLimit ? 'bg-[rgba(193,17,17,0.9)]' :
                                                     'gradiantGold border border-[#edc314] hover:scale-105'}`}
                                     >
-                                        <div className={`absolute top-0 right-0 px-4 rounded-full backdrop-shadow-md
-                                                        ${index > maxUnlockedStep ? 'bg-[rgba(0,208,227,0.7)]' : 
+                                        <div className={`absolute top-0 left-0 right-0 rounded-t-md mx-auto px-4 shadow-xl
+                                                        ${index > maxUnlockedStep ? 'opacity-0' : 
                                                         index < maxUnlockedStep ? 'bg-[rgba(227,193,0,0.9)]' :
                                                         index === maxUnlockedStep && score <= scoreSuccessLimit ? 'bg-[rgba(193,17,17,0.9)]' :
                                                         'bg-[rgba(0,208,227,0.7)]'}`}>
