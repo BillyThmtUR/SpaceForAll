@@ -10,7 +10,7 @@ import { Questions70km } from './questions/70km';
 import { Questions80km } from './questions/80km';
 import { Questions90km } from './questions/90km';
 import { Questions100km } from './questions/100km';
-
+import Loader from '../Loader';
 import QuizQuestions from './QuizQuestions';
 import GalaxyBackground from '../backgrounds/GalaxyBackground';
 
@@ -18,8 +18,10 @@ function Quiz() {
     const [score, setScore] = useState(0);
     const [activeStep, setActiveStep] = useState(null);
     const containerRef = useRef(null); 
+    const [loading, setLoading] = useState(true);
     const scoreSuccessLimit = 1; // Limite pour le success score
     const [activeSectionIndex, setActiveSectionIndex] = useState(1); // start with the troposphere section by default
+
 
     // Décors
     const DECORS = {
@@ -105,6 +107,7 @@ function Quiz() {
         },
     };
 
+
     
 
     const STEPS = [
@@ -181,6 +184,47 @@ function Quiz() {
             containerRef.current.scrollTo(0, containerRef.current.scrollHeight);  // Fait défiler la div en bas à l'ouverture
         }
     }, []);
+
+    useEffect(() => {
+        const imageUrls = [
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/10km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/mobile_10km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/20km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/mobile_20km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/30km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/mobile_30km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/40km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/mobile_40km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/50km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/mobile_50km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/60km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/mobile_60km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/70km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/mobile_70km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/80km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/mobile_80km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/90km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/mobile_90km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/100km.jpg`,
+            `${process.env.PUBLIC_URL}/data/quizImages/decors/mobile_100km.jpg`
+        ];
+
+        let loadedImages = 0;
+        imageUrls.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => {
+                loadedImages++;
+                if (loadedImages === imageUrls.length) {
+                    setLoading(false);
+                }
+            };
+        });
+    }, []);
+
+    if (loading) {
+        return <Loader />;
+    }
 
 
     return (

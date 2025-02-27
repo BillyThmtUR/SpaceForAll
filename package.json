@@ -1,7 +1,7 @@
 {
   "name": "client2",
   "version": "0.1.0",
-  "homepage": "./",
+  "homepage": "/spaceforall",
   "private": true,
   "dependencies": {
     "@react-spring/parallax": "^9.7.3",

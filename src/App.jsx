@@ -33,7 +33,7 @@ export default function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Accueil />} />
+        <Route path="/spaceforall" element={<Accueil />} />
         <Route path="/earth" element={<Earth />} />
         <Route path="/moon" element={<Moon />} />
         <Route path="/mars" element={<Mars />} />
