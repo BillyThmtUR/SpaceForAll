@@ -57,7 +57,7 @@ function Navbar() {
     </button>
 
     <div className={`${isMobileMenuOpen ? '' : 'hidden'} w-full min-[1152px]:block min-[1152px]:w-auto`} >
-      <ul className="flex flex-col font-medium p-4 min-[1152px]:p-0 mt-4 min-[1152px]:flex-row min-[1152px]:space-x-8 min-[1152px]:mt-0 min-[1152px]:border-0 dark:bg-gray-800 text-white">
+      <ul className="flex flex-col font-medium p-4 min-[1152px]:p-0 mt-4 min-[1152px]:flex-row min-[1152px]:space-x-8 min-[1152px]:mt-0 min-[1152px]:border-0 text-white">
         <li>
         <Link to="/" className="block py-2 pl-3 pr-4 hoverGradiantAnimator" >Accueil</Link>
         </li>

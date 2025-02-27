@@ -8,56 +8,70 @@ import 'aos/dist/aos.css';
 export default function Accueil() {
   const [loading, setLoading] = useState(true);
   const [minDelayMet, setMinDelayMet] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
-  // Initialize AOS when the component mounts
+
   useEffect(() => {
     AOS.init({});
-      // Lorsque toutes les ressources de la page sont chargées, cachez le loader
-      const handleLoad = () => {
-        if (minDelayMet) {
-          setLoading(false);
-        } else {
-          // Si le délai minimum n'est pas encore atteint, attendez qu'il le soit.
-          setTimeout(() => {
-            setLoading(false);
-          }, 5000);
-        }
-      }
+  }, []);
   
-      if (document.readyState === "complete") {
-        handleLoad();
-      } else {
-        window.addEventListener('load', handleLoad);
-        // Supprimez l'écouteur d'événements lors du démontage du composant
-        return () => {
-          window.removeEventListener('load', handleLoad);
-        };
-      }
-    }, [minDelayMet]);
-  
-    // Assurez-vous que le Loader s'affiche pendant au moins 2 secondes.
-    useEffect(() => {
-      const timer = setTimeout(() => {
-        setMinDelayMet(true);
-        if (document.readyState === "complete") {
-          setLoading(false);
-        }
-      }, 2000);
-      // Supprimez le timer lors du démontage pour éviter les fuites de mémoire.
-      return () => {
-        clearTimeout(timer);
-      };
-  }, []); 
+  // Liste des images à charger
+  const imagesToLoad = [
+    `${process.env.PUBLIC_URL}/img/Intro00.jpg`,
+    `${process.env.PUBLIC_URL}/img/astronaut.png`,
+    `${process.env.PUBLIC_URL}/img/astronaut2.png`,
+    `${process.env.PUBLIC_URL}/img/nasa-logo.svg`,
+  ];
+
+  // Charger toutes les images avant d'afficher la page
+  useEffect(() => {
+    const preloadImages = async () => {
+
+      const imagePromises = imagesToLoad.map((src, index) => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = src;
+          img.onload = () => {
+            resolve();
+          };
+            img.onerror = () => {
+              resolve(); // On continue même en cas d'erreur
+            };
+        });
+      });
+
+      await Promise.all(imagePromises);
+      setImagesLoaded(true);
+    };
+
+    preloadImages();
+  }, []);
+
+  // Assurer un délai minimum de 3 secondes avant la disparition du loader
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setMinDelayMet(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Masquer le loader une fois que toutes les images sont chargées ET que le délai est atteint
+  useEffect(() => {
+    if (imagesLoaded && minDelayMet) {
+      setLoading(false);
+      console.log(
+        "%cCreated by Billy THOMONT 🚀 - www.billythomont.com",
+        "color: rgb(55, 255, 0); background: #000; font-size: 16px; padding: 10px; border: 2px solid rgb(55, 255, 0); font-family: 'Courier New', monospace; text-shadow: 0 0 10px rgb(55, 255, 0);"
+      );
+    }
+  }, [imagesLoaded, minDelayMet]);
 
   useEffect(() => {
-    // Cacher la barre de défilement lorsque le composant est monté
     document.body.style.overflow = 'hidden';
-
-    // Réafficher la barre de défilement lorsque le composant est démonté
     return () => {
       document.body.style.overflow = 'unset';
     };
-    }, []);
+  }, []);
 
   const handleStartClick = () => {
   // Ouvre la section "système solaire"
@@ -68,7 +82,6 @@ export default function Accueil() {
   if (loading) {
     return <Loader />;
   }
-
 
   return (
     <>
