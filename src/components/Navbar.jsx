@@ -79,7 +79,7 @@ function Navbar() {
                   activeSubMenu === 'stars' && (
                     <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="0" data-aos-duration="150">
                       <Link to="/sun" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
-                        <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/sunIcon.png`} />
+                        <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/sunIcon.png`} alt="Icône du soleil"/>
                         Le soleil
                       </Link>
                     </li>
@@ -93,54 +93,54 @@ function Navbar() {
                 {
                   activeSubMenu === 'planets' && (
                     <>
-                  <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="0" data-aos-duration="150">
-                    <Link to="/earth" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
-                      <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/terreIcon.png`} />
-                      La terre
-                    </Link>
-                  </li>
-                  <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="100" data-aos-duration="150">
-                    <Link to="/jupiter" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
-                      <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/jupiterIcon.png`} />
-                      Jupiter
-                    </Link>
-                  </li>
-                  <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="200" data-aos-duration="150">
-                    <Link to="/mars" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
-                      <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/marsIcon.png`} />
-                      Mars
-                    </Link>
-                  </li>
-                  <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="300" data-aos-duration="150">
-                    <Link to="/mercury" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
-                      <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/mercureIcon.png`} />
-                      Mercure
-                    </Link>
-                  </li>
-                  <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="400" data-aos-duration="150">
-                    <Link to="/neptune" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
-                      <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/neptuneIcon.png`} />
-                      Neptune
-                    </Link>
-                  </li>
-                  <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="500" data-aos-duration="150">
-                    <Link to="/saturn" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
-                      <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/saturnIcon.png`} />
-                      Saturne
-                    </Link>
-                  </li>
-                  <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="600" data-aos-duration="150">
-                    <Link to="/uranus" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
-                      <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/uranusIcon.png`} />
-                      Uranus
-                    </Link>
-                  </li>
-                  <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="700" data-aos-duration="150">
-                    <Link to="/venus" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
-                      <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/venusIcon.png`} />
-                      Venus
-                    </Link>
-                  </li>
+                      <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="0" data-aos-duration="150">
+                      <Link to="/earth" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
+                        <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/terreIcon.png`} alt="Icône de la Terre" />
+                        La terre
+                      </Link>
+                      </li>
+                      <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="100" data-aos-duration="150">
+                      <Link to="/jupiter" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
+                        <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/jupiterIcon.png`} alt="Icône de Jupiter" />
+                        Jupiter
+                      </Link>
+                      </li>
+                      <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="200" data-aos-duration="150">
+                      <Link to="/mars" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
+                        <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/marsIcon.png`} alt="Icône de Mars" />
+                        Mars
+                      </Link>
+                      </li>
+                      <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="300" data-aos-duration="150">
+                      <Link to="/mercury" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
+                        <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/mercureIcon.png`} alt="Icône de Mercure" />
+                        Mercure
+                      </Link>
+                      </li>
+                      <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="400" data-aos-duration="150">
+                      <Link to="/neptune" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
+                        <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/neptuneIcon.png`} alt="Icône de Neptune" />
+                        Neptune
+                      </Link>
+                      </li>
+                      <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="500" data-aos-duration="150">
+                      <Link to="/saturn" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
+                        <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/saturnIcon.png`} alt="Icône de Saturne" />
+                        Saturne
+                      </Link>
+                      </li>
+                      <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="600" data-aos-duration="150">
+                      <Link to="/uranus" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
+                        <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/uranusIcon.png`} alt="Icône d'Uranus" />
+                        Uranus
+                      </Link>
+                      </li>
+                      <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="700" data-aos-duration="150">
+                      <Link to="/venus" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
+                        <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/venusIcon.png`} alt="Icône de Vénus" />
+                        Venus
+                      </Link>
+                      </li>
                 </>
                 )
               }
@@ -154,7 +154,7 @@ function Navbar() {
                   <>
                     <li onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} data-aos="fade-down" data-aos-delay="0" data-aos-duration="150">
                       <Link to="/moon" href="#" className="block mx-4 px-4 py-2 hoverGradiantAnimator">
-                        <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/luneIcon.png`} />
+                        <img className="icon mr-2" src={`${process.env.PUBLIC_URL}/img/planetsIcon/luneIcon.png`} alt="Icône de la lune"/>
                         La lune
                       </Link>
                     </li>
