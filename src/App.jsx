@@ -8,6 +8,10 @@ import Navbar from './components/Navbar';
 import Accueil from './components/Accueil';
 import Quiz from './components/quiz/Quiz';
 import Contact from './components/Contact';
+import LoginSchool from './components/LoginSchool';
+import DashboardEcole from './components/DashboardEcole';
+import DashboardAdmin from './components/DashboardAdmin';
+import AdminCreateSchool from './components/AdminCreateSchool';
 
 import Earth from './components/solarSystem/Earth';
 import Moon from './components/solarSystem/Moon';
@@ -46,6 +50,11 @@ export default function App() {
         <Route path="/sun" element={<Sun />} /> 
         <Route path="/quiz" element={<Quiz />} />  
         <Route path="/contact" element={<Contact />} />  
+
+        <Route path="/login" element={<LoginSchool />} />
+        <Route path="/dashboard-ecole" element={<DashboardEcole />} />
+        <Route path="/dashboard-admin" element={<DashboardAdmin />} />
+        <Route path="/nouvelle-ecole" element={<AdminCreateSchool />} />
       </Routes>
 
     </Router>

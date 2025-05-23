@@ -1,27 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
-
-import { Questions10km } from './questions/10km';
-import { Questions20km } from './questions/20km';
-import { Questions30km } from './questions/30km';
-import { Questions40km } from './questions/40km';
-import { Questions50km } from './questions/50km';
-import { Questions60km } from './questions/60km';
-import { Questions70km } from './questions/70km';
-import { Questions80km } from './questions/80km';
-import { Questions90km } from './questions/90km';
-import { Questions100km } from './questions/100km';
 import Loader from '../Loader';
 import QuizQuestions from './QuizQuestions';
 import GalaxyBackground from '../backgrounds/GalaxyBackground';
+import { QUIZ_QUESTIONS } from './questionsData';
+import QuizSetup from './QuizSetup';
+import { supabase } from '../../lib/supabaseClient';
 
 function Quiz() {
+    const [studentId, setStudentId] = useState(null);
     const [score, setScore] = useState(0);
     const [activeStep, setActiveStep] = useState(null);
     const containerRef = useRef(null); 
     const [loading, setLoading] = useState(true);
     const scoreSuccessLimit = 1; // Limite pour le success score
     const [activeSectionIndex, setActiveSectionIndex] = useState(1); // start with the troposphere section by default
-
 
     // Décors
     const DECORS = {
@@ -107,21 +99,15 @@ function Quiz() {
         },
     };
 
+    // Paliers
+    const STEP_ALTITUDES = ['10km', '20km', '30km', '40km', '50km', '60km', '70km', '80km', '90km', '100km'];
 
-    
-
-    const STEPS = [
-        { name: '10km', questions: Questions10km, decor: DECORS.decor_10km, decorMobile: DECORS.decorMobile_10km},
-        { name: '20km', questions: Questions20km, decor: DECORS.decor_20km, decorMobile: DECORS.decorMobile_20km },
-        { name: '30km', questions: Questions30km, decor: DECORS.decor_30km, decorMobile: DECORS.decorMobile_30km},
-        { name: '40km', questions: Questions40km, decor: DECORS.decor_40km, decorMobile: DECORS.decorMobile_40km },
-        { name: '50km', questions: Questions50km, decor: DECORS.decor_50km, decorMobile: DECORS.decorMobile_50km },
-        { name: '60km', questions: Questions60km, decor: DECORS.decor_60km, decorMobile: DECORS.decorMobile_60km },
-        { name: '70km', questions: Questions70km, decor: DECORS.decor_70km, decorMobile: DECORS.decorMobile_70km },
-        { name: '80km', questions: Questions80km, decor: DECORS.decor_80km, decorMobile: DECORS.decorMobile_80km },
-        { name: '90km', questions: Questions90km, decor: DECORS.decor_90km, decorMobile: DECORS.decorMobile_90km },
-        { name: '100km', questions: Questions100km, decor: DECORS.decor_100km, decorMobile: DECORS.decorMobile_100km },
-    ]
+    const STEPS = STEP_ALTITUDES.map((alt) => ({
+    name: alt,
+    questions: QUIZ_QUESTIONS[alt],
+    decor: DECORS[`decor_${alt}`],
+    decorMobile: DECORS[`decorMobile_${alt}`],
+    }));
 
     const handleStepCompletion = (stepIndex) => {
         // If it's the last step of the current section
@@ -185,6 +171,29 @@ function Quiz() {
         }
     }, []);
 
+    const [schoolLevel, setSchoolLevel] = useState(null);
+
+    useEffect(() => {
+    const fetchSchoolLevel = async () => {
+        const { data: userData, error: userError } = await supabase.auth.getUser();
+        if (userError || !userData?.user?.email) return;
+
+        const { data, error } = await supabase
+        .from('schools')
+        .select('level')
+        .eq('email', userData.user.email)
+        .single();
+
+        if (!error && data?.level) {
+        setSchoolLevel(data.level);
+        } else {
+        setSchoolLevel('college'); // fallback
+        }
+    };
+        fetchSchoolLevel();
+    }, []);
+
+
     useEffect(() => {
         const imageUrls = [
             `${process.env.PUBLIC_URL}/data/quizImages/decors/10km.jpg`,
@@ -222,10 +231,15 @@ function Quiz() {
         });
     }, []);
 
+    const questions = QUIZ_QUESTIONS[schoolLevel];
+
     if (loading) {
         return <Loader />;
     }
 
+    if (!studentId) {
+    return <QuizSetup onStudentCreated={(student) => setStudentId(student.id)} />;
+    }
 
     return (
         <>

@@ -1,15 +1,43 @@
 import React, { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
+import { supabase } from '../../lib/supabaseClient';
 
-function QuizQuestions({ score, setScore, setActiveStep, step, setMaxUnlockedStep, questions, scoreSuccessLimit }) {
+function QuizQuestions({ score, setScore, setActiveStep, step, setMaxUnlockedStep, questions, scoreSuccessLimit, studentId }) {
     const [currentQuestion, setCurrentQuestion] = useState(0);
 
-    const handleAnswer = (index) => {
-        if (questions[currentQuestion].correct === index) {
-            setScore(prevScore => prevScore + 1);
-        }
+    const handleAnswer = async (selectedKey) => {
+    const question = questions[currentQuestion];
+    const isCorrect = selectedKey === question.correct_answer;
 
-        setCurrentQuestion(prevQuestion => prevQuestion + 1);
+    if (!studentId) {
+        console.warn("Impossible d’enregistrer : pas de studentId.");
+        console.log("TEST .env →", process.env.REACT_APP_SUPABASE_URL);
+    return;
+    }
+
+    // Mise à jour du score local
+    if (isCorrect) {
+        setScore((prev) => prev + 1);
+    }
+
+    // Enregistrement dans Supabase
+    try {
+        const { error } = await supabase.from('answers').insert({
+        student_id: studentId, 
+        question_id: question.id,
+        selected_option: selectedKey,
+        is_correct: isCorrect,
+        });
+
+        if (error) {
+        console.error('Erreur Supabase lors de la soumission :', error.message);
+        }
+    } catch (err) {
+        console.error('Erreur inattendue :', err);
+    }
+
+    // Question suivante
+    setCurrentQuestion((prev) => prev + 1);
     };
 
     const advanceStep = () => {
@@ -67,16 +95,26 @@ function QuizQuestions({ score, setScore, setActiveStep, step, setMaxUnlockedSte
                                 <FaTimes size={20} color="white" />
                             </div>
                             <p className="absolute top-[2vh] right-[2vh] text-white font-Orbitron">Hauteur: {step}</p>
-                            <p className='relative font-bold bg-[rgba(0,0,0,0.3)] mt-10 p-10 text-white'>{questions[currentQuestion].question}</p>
+                            <p className='relative font-bold bg-[rgba(0,0,0,0.3)] mt-10 p-10 text-white'>{questions[currentQuestion].text}</p>
+                            <p className="absolute top-[2vh] right-[6vh] text-white font-Orbitron">
+                                Niveau : {step}
+                            </p>            
                         </div>
                         
                         <div className='flex flex-col justify-center items-center py-4 mt-10'>
-                        {questions[currentQuestion].answers.map((answer, index) => (
-                            <button key={index} onClick={() => handleAnswer(index)}
-                                className='bg-[rgba(0,208,227,0.1)] hoverGradiantAnimator hover:scale-105 w-[70%] px-4 py-4 mb-2'>
-                                {answer}
-                            </button>
-                        ))}
+                        {questions[currentQuestion] && questions[currentQuestion].options ? (
+                            Object.entries(questions[currentQuestion].options).map(([key, value]) => (
+                                <button
+                                key={key}
+                                onClick={() => handleAnswer(key)}
+                                className='bg-[rgba(0,208,227,0.1)] hoverGradiantAnimator hover:scale-105 w-[70%] px-4 py-4 mb-2'
+                                >
+                                {key}: {value}
+                                </button>
+                            ))
+                            ) : (
+                            <p style={{ color: 'red' }}>Aucune question disponible ou chargée.</p>
+                            )}
                         </div>
                     </>
                 ) : (

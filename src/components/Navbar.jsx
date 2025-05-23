@@ -174,9 +174,6 @@ function Navbar() {
         <li>
           <Link to="/contact" className="block py-2 pl-3 pr-4 min-[1152px]:border-0 hoverGradiantAnimator">Nous contacter</Link>
         </li>
-        <li>
-          <a href="#" className="block py-2 pl-3 pr-4 min-[1152px]:border-0 hoverGradiantAnimator">Se connecter</a>
-        </li>
       </ul>
     </div>
   </div>
